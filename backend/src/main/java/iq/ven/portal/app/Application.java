@@ -1,6 +1,4 @@
-package com.shekhargulati.app;
-
-import java.lang.reflect.Method;
+package iq.ven.portal.app;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -15,11 +13,16 @@ import org.springframework.web.servlet.mvc.condition.PatternsRequestCondition;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
+import java.lang.reflect.Method;
+
 @SpringBootApplication
 public class Application {
 
     @Value("${rest.api.base.path}")
     private String restApiBasePath;
+
+    @Value("${rest.acceptable.origins}")
+    private String restAcceptableOrigin;
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
@@ -30,7 +33,7 @@ public class Application {
         return new WebMvcConfigurerAdapter() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**").allowedMethods("*").allowedOrigins("http://localhost:4200");
+                registry.addMapping("/**").allowedMethods("*").allowedOrigins(restAcceptableOrigin);//allowed multiple origins and other stuff
             }
         };
     }

@@ -1,4 +1,4 @@
-package com.shekhargulati.app;
+package iq.ven.portal.app;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
